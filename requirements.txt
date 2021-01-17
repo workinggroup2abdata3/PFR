@@ -1,0 +1,7 @@
+io
+boto3
+s3fs
+botocore
+boto3
+cassandra-driver
+
