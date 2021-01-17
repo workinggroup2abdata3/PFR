@@ -50,7 +50,6 @@ services:
     volumes: 
       - ./hdfs_workspace:/user/cloudera/data:rw
       - ./jupyter_notebook/shared:/home/jovyan/work
-      - ./zeppelin/notebook:/zeppelin/notebook:rw
 
       
   jupyter:
@@ -81,7 +80,6 @@ services:
       - 8081:8081
     volumes:
       - ./jupyter_notebook/shared:/home/jovyan/work
-      - ./zeppelin/notebook:/zeppelin/notebook
     depends_on:
       - cloudera
     networks:
