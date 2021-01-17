@@ -5,8 +5,8 @@ volumes:
     driver: local
   cassandra2_data:
     driver: local
-  hdfs_workspace:
-    driver: local
+#  hdfs_workspace:
+#    driver: local
   
 
 services:
@@ -48,7 +48,7 @@ services:
     networks:
       - localnet
     volumes: 
-      - ./hdfs_workspace:/user/cloudera/data:rw
+#      - ./hdfs_workspace:/user/cloudera/data:rw
       - ./jupyter_notebook/shared:/home/jovyan/work
 
       
