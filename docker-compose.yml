@@ -1,14 +1,9 @@
 #version: "3.6"
 version: "2"
 volumes:
-  shared-workspace:
-    name: "hadoop-distributed-file-system"
-    driver: local
   cassandra_data:
     driver: local
   cassandra2_data:
-    driver: local
-  zeppelin_notebook:
     driver: local
   hdfs_workspace:
     driver: local
