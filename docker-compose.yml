@@ -55,7 +55,7 @@ services:
   jupyter:
     image: jupyter/all-spark-notebook 
     user: root
-    container_name: jupyterlab
+    container_name: jupyter
     environment:
       - JUPYTER_ENABLE_LAB=yes
     ports:
@@ -95,7 +95,6 @@ services:
       - 8082:8081
     volumes:
       - ./jupyter_notebook/shared:/home/jovyan/work
-      - ./zeppelin/notebook:/zeppelin/notebook
     depends_on:
       - cloudera
     networks:
