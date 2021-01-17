@@ -15,10 +15,17 @@ volumes:
   
 
 services:
+  portainer:
+    image: portainer/portainer
+    ports:
+      - 10001:9000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./portainer-data:/data
 
-  cloudera-spark:
+  cloudera:
     image: cloudera/quickstart:latest
-    container_name: cloudera-spark
+    container_name: cloudera
     privileged: true
     hostname: quickstart.cloudera
     command: /usr/bin/docker-quickstart
@@ -48,12 +55,13 @@ services:
     volumes: 
       - ./hdfs_workspace:/user/cloudera/data:rw
       - ./jupyter_notebook/shared:/home/jovyan/work
+      - ./zeppelin/notebook:/zeppelin/notebook:rw
 
       
   jupyter:
     image: jupyter/all-spark-notebook 
     user: root
-    container_name: jupyter
+    container_name: jupyterlab
     environment:
       - JUPYTER_ENABLE_LAB=yes
     ports:
@@ -75,10 +83,10 @@ services:
       - CORE_CONF_fs_defaultFS=hdfs://namenode:8020
       - SPARK_WORKER_MEMORY=1g
     ports:
-      - 7071:8081
+      - 8081:8081
     volumes:
       - ./jupyter_notebook/shared:/home/jovyan/work
-
+      - ./zeppelin/notebook:/zeppelin/notebook
     depends_on:
       - cloudera
     networks:
@@ -91,7 +99,7 @@ services:
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=1g
     ports:
-      - 7072:8081
+      - 8082:8081
     volumes:
       - ./jupyter_notebook/shared:/home/jovyan/work
       - ./zeppelin/notebook:/zeppelin/notebook
